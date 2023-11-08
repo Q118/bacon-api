@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "lib": [
+            "ES2015",
+            "DOM"
+        ],
+        "module": "commonjs",
+        "sourceMap": true,
+        "outDir": "./build",
+        "strict": true,
+        "esModuleInterop": true,
+        "noEmitOnError": true,
+        "resolveJsonModule": true,
+        "moduleResolution": "node",
+        "noImplicitAny": false,
+        "strictNullChecks": false,
+        "typeRoots": [
+            "./src/types"
+        ]
+    },
+    "exclude": [
+        "node_modules",
+        "tests",
+        "assets"
+    ]
+}
