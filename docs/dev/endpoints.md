@@ -1,5 +1,7 @@
 endpoints:
 
+GET /api/check
+
 POST /api/feature/get_id
 { title: 'title' }
 	=> { id: 'movie id' }

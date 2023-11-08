@@ -7,6 +7,8 @@ export type BaconActor = {
     id: string;
     /** user friendly name */
     name: string;
+    /** do we want the character name */
+    characterName?: string;
 };
 
 /**
@@ -17,7 +19,7 @@ export type BaconActor = {
 export type BaconFeature = {
     /** unique defined from db */
     id: string;
-    /** user friendly title */
+    /** user friendly official title returned from db */
     title: string;
 };
 

@@ -4,6 +4,7 @@
     "description": "backend service for bacon logic",
     "main": "app.js",
     "scripts": {
+        "start": "nodemon -r dotenv/config src/app.ts",
         "test": "vitest --ui"
     },
     "keywords": [],
@@ -11,12 +12,18 @@
     "license": "ISC",
     "dependencies": {
         "cors": "^2.8.5",
-        "express": "^4.18.2"
+        "express": "^4.18.2",
+        "swagger-jsdoc": "^6.2.8",
+        "swagger-ui-express": "^5.0.0",
+        "winston": "^3.11.0"
     },
     "devDependencies": {
         "@types/cors": "^2.8.16",
         "@types/express": "^4.17.21",
+        "@types/swagger-jsdoc": "^6.0.3",
+        "@types/swagger-ui-express": "^4.1.6",
         "@vitest/ui": "^0.34.6",
+        "dotenv": "^16.3.1",
         "vitest": "^0.34.6"
     }
 }
