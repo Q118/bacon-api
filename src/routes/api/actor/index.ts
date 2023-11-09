@@ -24,7 +24,7 @@ async function handleGetActorFeatures(req: Request, res: Response, next: NextFun
 
 
 /**
- * @swagger
+ * @openapi
  * /v1/api/actor/{actor_id}/features:
  * get:
  *    description: Get all features for an actor

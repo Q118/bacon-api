@@ -1,0 +1,115 @@
+{
+    "info": {
+        "title": "Hello World",
+        "version": "1.0.0",
+        "description": "A sample API"
+    },
+    "host": "localhost:4020",
+    "basePath": "/v1/api",
+    "swagger": "2.0",
+    "paths": {
+        "/check": {
+            "get": {
+                "description": "Health check for the API to ensure the client is authorized",
+                "responses": {
+                    "200": {
+                        "description": "Sanity check passed! You are authorized"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/actor/{actor_id}/features": {
+            "get": {
+                "description": "Returns features for an actor",
+                "tags": [
+                    "Actors"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "actor_id",
+                        "in": "path",
+                        "description": "ID of actor to fetch",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "features"
+                    }
+                }
+            }
+        },
+        "/feature/get_id": {
+            "get": {
+                "description": "Returns the ID of a feature",
+                "tags": [
+                    "Features"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "feature_name",
+                        "in": "query",
+                        "description": "Name of feature to fetch",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object with feature id"
+                    }
+                }
+            }
+        },
+        "/feature/{feature_id}/cast": {
+            "get": {
+                "description": "Returns the cast of a feature",
+                "tags": [
+                    "Features"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "feature_id",
+                        "in": "path",
+                        "description": "ID of feature to fetch",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object with feature cast"
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {},
+    "tags": [
+        {
+            "name": "Actors"
+        },
+        {
+            "name": "Features"
+        },
+        {
+            "name": "Health"
+        }
+    ]
+}

@@ -32,6 +32,7 @@ async function handleGetMovieId(req: Request, res: Response, next: NextFunction)
 
 /**
  * @swagger
+ * 
  * /v1/api/feature/{feature_id}/cast:
  * get:
  *   description: Get all actors for a feature

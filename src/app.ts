@@ -2,8 +2,11 @@ import express, { Request, Response, NextFunction, Express } from "express";
 import cors from "cors";
 // const swaggerUi = require('swagger-ui-express');
 import swaggerUi from "swagger-ui-express";
-import swaggerJsdoc from "swagger-jsdoc";
-import { swagger_options } from "./swagger";
+// import swaggerJsdoc from "swagger-jsdoc";
+// import { swagger_options } from "./swagger";
+// import swaggerJsdoc from "swagger-jsdoc";
+import * as swaggerDocument from "./swagger.json";
+
 import { router } from "./routes";
 
 const app: Express = express();
@@ -18,9 +21,11 @@ app.use(cors({
 
 
 /** swagger */
-const swaggerSpec = swaggerJsdoc(swagger_options);
+// const swaggerSpec = swaggerJsdoc(swagger_options);
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 
 
 
