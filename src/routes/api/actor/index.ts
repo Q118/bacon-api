@@ -12,9 +12,9 @@ export const actorRouter = Router({ mergeParams: true });
 
 async function handleGetActorFeatures(req: Request, res: Response, next: NextFunction) {
     try {
-
-
-        return res.status(200).json({ id: 'very fake id', features: [ { id: 'nothing', title: 'not a thing' } ] });
+        // console.log('req.params', req.params)
+        if (!req.params.actor_id) throw new Error('no actor id');
+        return res.status(200).json({ id: req.params.actor_id, features: [ { id: 'nothing', title: 'not a thing' } ] });
 
     } catch (error) {
         handleCaughtError(res, error, 'handleGetActorFeatures');
@@ -44,7 +44,7 @@ async function handleGetActorFeatures(req: Request, res: Response, next: NextFun
  *   id:
  *   type: string
  *  features:
- *  type: BaconFeatureList[]
+ *  @type {BaconFeatureList}[]
  */
 actorRouter.get('/:actor_id/features', (req, res, next) => {
     handleGetActorFeatures(req, res, next).catch(next);

@@ -14,11 +14,11 @@ export type BaconActor = {
 /**
  * @type BaconFeature
  * feature return type
- * a feature is anything the actor has a credit in.
+ * a feature is anything an actor has a credit in.
  */
 export type BaconFeature = {
     /** unique defined from db */
-    id: string;
+    id: number;
     /** user friendly official title returned from db */
     title: string;
 };

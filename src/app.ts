@@ -1,10 +1,6 @@
-import express, { Request, Response, NextFunction, Express } from "express";
+import express, { Express } from "express";
 import cors from "cors";
-// const swaggerUi = require('swagger-ui-express');
 import swaggerUi from "swagger-ui-express";
-// import swaggerJsdoc from "swagger-jsdoc";
-// import { swagger_options } from "./swagger";
-// import swaggerJsdoc from "swagger-jsdoc";
 import * as swaggerDocument from "./swagger.json";
 
 import { router } from "./routes";
@@ -19,21 +15,21 @@ app.use(cors({
 }));
 
 
-
-/** swagger */
-// const swaggerSpec = swaggerJsdoc(swagger_options);
-
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
-
-
-
 /** routes */
 app.use('/v1', router);
 
+/** swagger */
+if (process.env.environment !== 'production') {
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+}
 
 
-app.listen(PORT, () =>
-    console.log(`Server is listening on port ${PORT}...`)
-);
+
+
+app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}...`);
+    console.log('***********************************************');
+    console.log('______________________________________________');
+    console.log('***********************************************');
+    console.log('_______________________________________________');
+});

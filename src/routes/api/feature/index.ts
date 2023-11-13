@@ -1,6 +1,8 @@
 
 import { Router, Request, Response, NextFunction } from 'express';
 import { handleCaughtError } from '../../../utils/helpers';
+import { FeatureService } from '../../../services/FeatureService';
+
 // import { logger } from '../../../utils/logger';
 import { BaconActorList, BaconFeature } from '../../../types';
 export const featureRouter = Router({ mergeParams: true });
@@ -23,9 +25,17 @@ async function handleGetFeatureActors(req: Request, res: Response, next: NextFun
 
 async function handleGetMovieId(req: Request, res: Response, next: NextFunction) {
     try {
-        return res.status(200).json({ id: 'very fake movie id', title: 'yes' });
+        const { title } = req.query;
+        if (!title) throw new Error('no title provided');
+        const featureService = new FeatureService();
+        const featureResult: BaconFeature = await featureService.getFeatureByTitle("" + title);
+        // return res.status(200).json({ id: 'very fake movie id', title: 'yes' });
+        if (!featureResult) {
+            return res.status(404).json({ message: 'no feature found' });
+        } 
+        return res.status(200).json({ id: featureResult.id, title: featureResult.title });
     } catch (error) {
-        handleCaughtError(res, error, 'handleGetActorFeatures');
+        handleCaughtError(res, error, 'handleGetMovieId');
     }
 }
 
