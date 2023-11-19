@@ -1,5 +1,7 @@
 endpoints:
 
+<!-- ONLY MOVIE, not tv shows. thi keeops it sisintc and a bettter like need bc too much eerything is a on tv.. -->
+
 GET /api/check
 
 POST /api/feature/get_id

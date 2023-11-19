@@ -14,15 +14,27 @@ export type BaconActor = {
 /**
  * @type BaconFeature
  * feature return type
- * a feature is anything an actor has a credit in.
+ * a feature is any movie an actor has a credit in.
  */
 export type BaconFeature = {
     /** unique defined from db */
     id: number;
     /** user friendly official title returned from db */
     title: string;
+    /** character that the requested actor played */
+    characterName?: string;
 };
 
+/**
+ * @type BaconMovie
+ * just a movie thats been looked up by title
+ */
+export type BaconMovie = {
+    /** unique defined from db */
+    id: number;
+    /** user friendly official title returned from db */
+    title: string;
+};
 
 
 /**

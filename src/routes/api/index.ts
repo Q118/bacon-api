@@ -15,7 +15,6 @@ apiRouter.use('/feature', featureRouter);
 
 
 /**
- * @description sanity check to ensure the api is up and running and client is authorized
  * @param req 
  * @param res 
  * @param next 
@@ -32,19 +31,13 @@ async function handleAuthCheck(req: Request, res: Response, next: NextFunction) 
 
 
 
-/**
- * @swagger
- * /v1/api/check:
- *  get:
- *     description: Health check for the API to ensure the client is authorized
- *     responses:
- *      200:
- *         description: returns "Sanity check passed! You are authorized".
- *     401:
- *        description: returns "Unauthorized".
- *    500:
- *       description: returns "Internal Server Error".
- */
+/*
+ #swagger.responses[200] = {
+    "application/json": {
+        "description": "sanity check to ensure the api is up and running and client is authorized"
+    }
+ }
+*/
 apiRouter.get('/check', (req, res, next) => {
     handleAuthCheck(req, res, next).catch(next);
 });

@@ -5,7 +5,10 @@
     "main": "app.js",
     "scripts": {
         "start": "nodemon -r dotenv/config src/app.ts",
-        "test": "vitest --ui"
+        "prestart": "npm run swagger",
+        "swagger": "node ./scripts/swagger.js",
+        "test": "vitest --ui",
+        "test:no-ui": "vitest"
     },
     "keywords": [],
     "author": "",
@@ -13,7 +16,6 @@
     "dependencies": {
         "cors": "^2.8.5",
         "express": "^4.18.2",
-        "node-fetch": "^3.3.2",
         "swagger-ui-express": "^5.0.0",
         "winston": "^3.11.0"
     },
@@ -24,6 +26,7 @@
         "@types/swagger-ui-express": "^4.1.6",
         "@vitest/ui": "^0.34.6",
         "dotenv": "^16.3.1",
+        "swagger-autogen": "^2.23.7",
         "vitest": "^0.34.6"
     }
 }

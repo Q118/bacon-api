@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
 import { config } from '../../config';
 import { BaconFeature, BaconActor, BaconMovie } from '../../types';
 
