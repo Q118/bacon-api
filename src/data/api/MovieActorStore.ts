@@ -1,10 +1,12 @@
 // import fetch from 'node-fetch';
 import { config } from '../../config';
 import { BaconFeature, BaconActor, BaconMovie } from '../../types';
+import IDataInterface from '../dataInterface';
 
+// FUTURE: an abstracted repository layer if the complexity grows
 
 const apiKey = config.TMDB_API_KEY.v3;
-const urlPrefix = `/search/movie?query=`;
+// const urlPrefix = `/search/movie?query=`;
 const urlSuffix = `&page=1&api_key=${apiKey}`;
 
 
@@ -12,16 +14,14 @@ const urlSuffix = `&page=1&api_key=${apiKey}`;
  * @class MovieActorDataStore
  * fetches data from the TMDB API
  */
-export class MovieActorStore {
+export class MovieActorStore implements IDataInterface<BaconActor, BaconFeature> {
     api_key: string;
     api_base: string;
-    url_prefix: string;
     url_suffix: string;
 
     constructor() {
         this.api_key = apiKey;
         this.api_base = config.API_BASE_URL;
-        this.url_prefix = urlPrefix;
         this.url_suffix = urlSuffix;
     }
 
@@ -33,7 +33,7 @@ export class MovieActorStore {
      * @returns {Promise<BaconFeature>} movie data
      */
     async getMovieByTitle(title: string): Promise<BaconFeature> {
-        const url = `${this.api_base}${this.url_prefix}${title}${this.url_suffix}`;
+        const url = `${this.api_base}/search/movie?query=${title}${this.url_suffix}`;
         const response = await fetch(url);
         const data = await response.json() as { results: any[] };
         if (data && data.results && data.results.length > 0) {
@@ -72,14 +72,13 @@ export class MovieActorStore {
      * gets a list of every movie feature an actor has been in
      * @returns 
      */
-    async getMoviesByActorId(id: string): Promise<BaconFeature[]> {
+    async getMoviesByActorId(id: number): Promise<BaconFeature[]> {
         const url = `${this.api_base}/person/${id}/movie_credits?api_key=${this.api_key}`;
         const response = await fetch(url);
         const data = await response.json() as { cast: any[] };
         if (data && data.cast && data.cast.length > 0) {
             const movies = data.cast.map((movie) => this.convertToBaconFeature(movie));
-
-            console.log(movies)
+            // console.log(movies)
             return movies;
         } else {
             throw new Error('invalid actor ID');

@@ -5,6 +5,6 @@ import { logger } from './logger';
 export const handleCaughtError = (res: Response, error: any, method: string) => {
     logger.error(`Error in ${method} call`);
     logger.error(error);
-    if (error && error.code === 'BlobNotFound') return res.status(404).json({ message: 'The requested blob was not found' });
+    if (error.message) return res.status(400).json({ message: error.message });
     return res.status(500).json({ message: 'Internal Server Error' });
 };

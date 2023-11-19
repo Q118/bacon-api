@@ -171,7 +171,7 @@ describe('MovieActorStore', () => {
     describe('getMoviesByActorId', () => {
         it('should log to console', async () => {
             let movieStore = MovieActorStore.init();
-            let response = await movieStore.getMoviesByActorId('1532');
+            let response = await movieStore.getMoviesByActorId(1532);
             expect(response.some((movie) => movie.title === 'Lost in Translation')).toBe(true);
             expect(response.some((movie) => movie.title === 'Broken Flowers')).toBe(true);
         });
