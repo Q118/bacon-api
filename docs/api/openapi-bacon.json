@@ -17,7 +17,14 @@
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "sanity check to ensure the api is up and running and client is authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/authCheckResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -37,7 +44,14 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Get all features for an actor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaconFeatureList"
+                }
+              }
+            }
           }
         }
       }
@@ -57,13 +71,20 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "feature list return type that a requested actor has been in",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaconFeatureList"
+                }
+              }
+            }
           }
         }
       }
     },
     "/feature/get_id": {
-      "get": {
+      "post": {
         "description": "",
         "parameters": [
           {
@@ -76,10 +97,27 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "just a movie thats been looked up by title",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaconMovie"
+                }
+              }
+            }
           },
           "404": {
             "description": "Not Found"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetMovieRequest"
+              }
+            }
           }
         }
       }
@@ -177,18 +215,36 @@
               "properties": {
                 "id": {
                   "type": "number",
-                  "example": 422
+                  "example": 456
                 },
                 "name": {
                   "type": "string",
-                  "example": "Another Actor"
+                  "example": "Jane Doe"
                 },
                 "characterName": {
                   "type": "string",
-                  "example": "Another Character"
+                  "example": "Charlie Brock"
                 }
               }
             }
+          }
+        }
+      },
+      "authCheckResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Health check passed! You are authorized."
+          }
+        }
+      },
+      "GetMovieRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "User Inputted Movie Title"
           }
         }
       }

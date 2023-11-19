@@ -1,7 +1,7 @@
 import express, { Express } from "express";
 import cors from "cors";
 import swaggerUi from "swagger-ui-express";
-import * as swaggerDocument from "../docs/api/openapi.json";
+import * as swaggerDocument from "../docs/api/openapi-bacon.json";
 
 import { router } from "./routes";
 
@@ -16,12 +16,13 @@ app.use(cors({
 
 
 /** routes */
-app.use('/v1', router);
+// app.use('/v1', router);
+app.use('/', router);
 
 /** 
  * swagger
- * the doc can be updated manually with with `npm run swagger`
- * But hmr is enabled so it will update automatically when you save while the server is running
+ * the doc can be updated manually with `npm run swagger`
+ * it is also ran at the start of the server
  */
 if (process.env.environment !== 'production') {
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

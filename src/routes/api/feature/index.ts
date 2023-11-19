@@ -32,7 +32,7 @@ async function handleGetMovieId(req: Request, res: Response, next: NextFunction)
         // return res.status(200).json({ id: 'very fake movie id', title: 'yes' });
         if (!featureResult) {
             return res.status(404).json({ message: 'no feature found' });
-        } 
+        }
         return res.status(200).json({ id: featureResult.id, title: featureResult.title });
     } catch (error) {
         handleCaughtError(res, error, 'handleGetMovieId');
@@ -40,58 +40,44 @@ async function handleGetMovieId(req: Request, res: Response, next: NextFunction)
 }
 
 
-/**
- * @swagger
- * 
- * /v1/api/feature/{feature_id}/cast:
- * get:
- *   description: Get all actors for a feature
- *  parameters:
- *   - in: path
- *   name: feature_id
- *  schema:
- *  type: string
- * required: true
- * description: The id of the feature
- * responses:
- * 200:
- * description: returns an array of actors for the feature
- * schema:
- * type: object
- * properties:
- * id:
- * type: string
- * cast:
- * type: BaconActorList[]
- */
 featureRouter.get('/:feature_id/cast', (req, res, next) => {
+    /* #swagger.responses[200] = {
+            description: "feature list return type that a requested actor has been in",
+            content: {
+                "application/json": {
+                    schema:{
+                        $ref: "#/components/schemas/BaconFeatureList"
+                    }
+                }           
+            }
+        }   
+    */
     handleGetFeatureActors(req, res, next).catch(next);
 });
 
 
-/**
- * @swagger
- * /v1/api/feature/get_id:
- * get:
- *  description: Get the id of a feature
- * parameters:
- * - in: query
- * name: title
- * schema:
- * type: string
- * required: true
- * description: The title of the feature
- * responses:
- * 200:
- * description: returns the id of the feature
- * schema:
- * type: BaconFeature
- * properties:
- * id:
- * type: string
- * title:
- * type: string
- */
-featureRouter.get('/get_id', (req, res, next) => {
+featureRouter.post('/get_id', (req, res, next) => {
+    /*  #swagger.requestBody = {
+        required: true,
+        content: {
+            "application/json": {
+                schema: {
+                    $ref: "#/components/schemas/GetMovieRequest"
+                }  
+            }
+        }
+    } 
+*/
+    /* #swagger.responses[200] = {
+            description: "just a movie thats been looked up by title",
+            content: {
+                "application/json": {
+                    schema:{
+                        $ref: "#/components/schemas/BaconMovie"
+                    }
+                }           
+            }
+        }   
+    */
     handleGetMovieId(req, res, next).catch(next);
 });

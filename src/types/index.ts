@@ -4,7 +4,7 @@
  */
 export type BaconActor = {
     /** unique defined from db */
-    id: string;
+    id: number;
     /** user friendly name */
     name: string;
     /** do we want the character name */
@@ -39,11 +39,11 @@ export type BaconMovie = {
 
 /**
  * @type BaconFeatureList
- * feature list return type
+ * feature list return type that a requested actor has been in
  */
 export type BaconFeatureList = {
     /** the id of the actor assigned by db  */
-    id: string;
+    id: number;
     features: BaconFeature[];
 };
 
@@ -53,6 +53,6 @@ export type BaconFeatureList = {
  */
 export type BaconActorList = {
     /** the id of the movie assigned by db  */
-    id: string;
+    id: number;
     actors: BaconActor[];
 };

@@ -31,13 +31,18 @@ async function handleAuthCheck(req: Request, res: Response, next: NextFunction) 
 
 
 
-/*
- #swagger.responses[200] = {
-    "application/json": {
-        "description": "sanity check to ensure the api is up and running and client is authorized"
-    }
- }
-*/
+
 apiRouter.get('/check', (req, res, next) => {
+    /* #swagger.responses[200] = {
+        description: "sanity check to ensure the api is up and running and client is authorized",
+        content: {
+            "application/json": {
+                schema:{
+                    $ref: "#/components/schemas/authCheckResponse"
+                }
+            }           
+        }
+    }   
+*/
     handleAuthCheck(req, res, next).catch(next);
 });

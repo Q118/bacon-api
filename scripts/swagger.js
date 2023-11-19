@@ -50,7 +50,12 @@ const doc = {
                     { id: 456, name: 'Jane Doe', characterName: 'Charlie Brock', },
                 ],
             },
-
+            authCheckResponse: {
+                message: 'Health check passed! You are authorized.'
+            },
+            GetMovieRequest: {
+                title: 'User Inputted Movie Title',
+            }
         },
     },
 
@@ -59,7 +64,7 @@ const doc = {
     // FUTURE: would eventually want security around the calls if if its a paid thing and they use that key and cross check and yea from here but for now during dev just opwen
 };
 
-const outputFile = 'docs/api/openapi.json';
+const outputFile = 'docs/api/openapi-bacon.json';
 const routes = [ 'src/routes/api/index.ts' ];
 
 /* NOTE: If you are using the express Router, you must pass in the 'routes' only the 

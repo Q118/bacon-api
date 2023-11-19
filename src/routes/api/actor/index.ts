@@ -12,7 +12,7 @@ export const actorRouter = Router({ mergeParams: true });
 
 async function handleGetActorFeatures(req: Request, res: Response, next: NextFunction) {
     try {
-        console.log('req.params', req.params)
+        // console.log('req.params', req.params)
         if (!req.params.actor_id) throw new Error('no actor id');
         return res.status(200).json({ id: req.params.actor_id, features: [ { id: 'nothing', title: 'not a thing' } ] });
 
