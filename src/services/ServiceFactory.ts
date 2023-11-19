@@ -1,4 +1,5 @@
 import { ActorService } from "./ActorService";
+import { FeatureService } from "./FeatureService";
 import { MovieActorStore } from "../data/api/MovieActorStore";
 
 type ActorServiceFactoryParams = {
@@ -18,6 +19,13 @@ export class BaconServiceFactory {
         return new ActorService({
             actor_id: actorServiceParams.actor_id,
             // movie_id: actorServiceParams.movie_id,
+            dataStore: dataStore
+        });
+    }
+
+    static createFeatureService() {
+        const dataStore = MovieActorStore.init();
+        return new FeatureService({
             dataStore: dataStore
         });
     }

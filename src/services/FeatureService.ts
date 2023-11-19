@@ -1,9 +1,10 @@
-import { MovieActorStore } from "../data/api/MovieActorStore";
+import IDataInterface from "../data/DataInterface";
+import { BaconActor, BaconFeature } from "../types";
 
-// type FeatureServiceParams = {
-//     feature_id: string;
-//     movie_id: string;
-// }
+type FeatureServiceParams = {
+    // feature_title: string;
+    dataStore: IDataInterface<BaconActor, BaconFeature>;
+}
 
 
 
@@ -14,23 +15,32 @@ import { MovieActorStore } from "../data/api/MovieActorStore";
  */
 
 export class FeatureService {
-    dataStore: MovieActorStore;
+    // feature_title: string;
+    dataStore: IDataInterface<BaconActor, BaconFeature>;
 
 
 
-    constructor() {
-        this.dataStore = new MovieActorStore();
+
+    constructor(featureServiceParams: FeatureServiceParams) {
+        // this.feature_title = featureServiceParams.feature_title;
+        this.dataStore = featureServiceParams.dataStore;
     }
 
-    getFeatures(movie_id: string) {
-        // return this.answer_id;
-    }
 
     getFeatureById(feature_id: string) {
         // return this.answer_id;
     }
 
-    getFeatureByTitle = async (title: string) => this.dataStore.getMovieByTitle(title);
+    getFeatureByTitle = async (feature_title: string) => {
+        const feature = await this.dataStore.getMovieByTitle(feature_title);
+        return feature;
+    }
+
+    getFeatureCastByMovieId = async (feature_id: number) => {
+        const cast = await this.dataStore.getCastByMovieId(feature_id);
+        return cast;
+    }
+
 
 
     // TODO: handle it not being the first one. in service layer

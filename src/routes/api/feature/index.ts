@@ -1,7 +1,7 @@
 
 import { Router, Request, Response, NextFunction } from 'express';
 import { handleCaughtError } from '../../../utils/helpers';
-import { FeatureService } from '../../../services/FeatureService';
+import { BaconServiceFactory } from '../../../services/ServiceFactory';
 
 // TODO: import { logger } from '../../../utils/logger';
 import { BaconActorList, BaconFeature } from '../../../types';
@@ -11,13 +11,17 @@ export const featureRouter = Router({ mergeParams: true });
 
 
 
-
+// PICK UP HERE
 async function handleGetFeatureActors(req: Request, res: Response, next: NextFunction) {
     try {
-
-
-        return res.status(200).json({ id: 'very fake movie id', cast: [ { id: 'nothing', name: 'not a thing', characterName: 'george' } ] });
-
+        if (!req.params.feature_id) throw new Error('no feature id');
+        const featureService = BaconServiceFactory.createFeatureService();
+        const featureCast = featureService.getFeatureCastByMovieId(+req.params.feature_id);
+        if (!featureCast) {
+            return res.status(404).json({ message: 'cannot find cast for the requested feature ID.' });
+        }
+        // return res.status(200).json({ id: 'very fake movie id', cast: [ { id: 'nothing', name: 'not a thing', characterName: 'george' } ] });
+        return res.status(200).json({ id: req.params.feature_id, cast: featureCast });
     } catch (error) {
         handleCaughtError(res, error, 'handleGetActorFeatures');
     }
@@ -27,11 +31,10 @@ async function handleGetMovieId(req: Request, res: Response, next: NextFunction)
     try {
         const { title } = req.query;
         if (!title) throw new Error('no title provided');
-        const featureService = new FeatureService();
-        const featureResult: BaconFeature = await featureService.getFeatureByTitle("" + title);
-        // return res.status(200).json({ id: 'very fake movie id', title: 'yes' });
+        const featureService = BaconServiceFactory.createFeatureService();
+        const featureResult: BaconFeature = await featureService.getFeatureByTitle(title as string);
         if (!featureResult) {
-            return res.status(404).json({ message: 'no feature found' });
+            return res.status(404).json({ message: 'feature cannot be found with provided title' });
         }
         return res.status(200).json({ id: featureResult.id, title: featureResult.title });
     } catch (error) {

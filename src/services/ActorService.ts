@@ -1,4 +1,4 @@
-import IDataInterface from "../data/dataInterface";
+import IDataInterface from "../data/DataInterface";
 import { BaconActor, BaconFeature } from "../types";
 
 export type ActorServiceParams = {
