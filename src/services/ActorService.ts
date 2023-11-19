@@ -1,8 +1,9 @@
+import IDataInterface from "../data/dataInterface";
+import { BaconActor, BaconFeature } from "../types";
 
-
-type ActorServiceParams = {
-    actor_id: string;
-    movie_id: string;
+export type ActorServiceParams = {
+    actor_id: number;
+    dataStore: IDataInterface<BaconActor, BaconFeature>;
 }
 
 
@@ -14,21 +15,23 @@ type ActorServiceParams = {
  */
 
 export class ActorService {
-    answer_id: string;
-    movie_id: string;
+    actor_id: number;
+    // movie_id: number;
+    dataStore: IDataInterface<BaconActor, BaconFeature>;
+
 
 
     constructor(actorServiceParams: ActorServiceParams) {
-        this.answer_id = actorServiceParams.actor_id;
-        this.movie_id = actorServiceParams.movie_id;
+        this.actor_id = actorServiceParams.actor_id;
+        // this.movie_id = actorServiceParams.movie_id;
+        this.dataStore = actorServiceParams.dataStore;
     }
 
-    getActors(movie_id: string) {
-        // return this.answer_id;
-    
+    async getFeaturesForActor() {
+        const features = await this.dataStore.getMoviesByActorId(this.actor_id);
+        return features;
     }
 
-    // TODO: handle it not being the first one. in service layer
     
 
 
