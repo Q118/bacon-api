@@ -3,6 +3,10 @@ import { MovieActorStore } from '../../src/data/api/MovieActorStore';
 
 // TODO: mock the fetch call...
 
+// INFO: fo now i am using this pseudoly to test the api calls but before i have api calls just male thing the logic so just want to test logicv...
+
+// .. wontt have this in git eventualy
+
 const groundhogResponse = {
     id: 137,
     title: 'Groundhog Day',
@@ -13,39 +17,19 @@ const groundhogCast = [
     { id: 1533, name: 'Andie MacDowell', characterName: 'Rita Hanson' },
     { id: 1534, name: 'Chris Elliott', characterName: 'Larry' },
     { id: 537, name: 'Stephen Tobolowsky', characterName: 'Ned Ryerson' },
-    {
-        id: 1535,
-        name: 'Brian Doyle-Murray',
-        characterName: 'Buster Green'
-    },
+    { id: 1535, name: 'Brian Doyle-Murray', characterName: 'Buster Green' },
     { id: 1536, name: 'Marita Geraghty', characterName: 'Nancy Taylor' },
     { id: 1537, name: 'Angela Paton', characterName: 'Mrs. Lancaster' },
     { id: 1538, name: 'Rick Ducommun', characterName: 'Gus' },
     { id: 1539, name: 'Rick Overton', characterName: 'Ralph' },
     { id: 1540, name: 'Robin Duke', characterName: 'Doris the Waitress' },
     { id: 1541, name: 'Carol Bivins', characterName: 'Anchorwoman' },
-    {
-        id: 1542,
-        name: 'Willie Garson',
-        characterName: "Phil's Assistant Kenny"
-    },
-    {
-        id: 236327,
-        name: 'Ken Hudson Campbell',
-        characterName: 'Man in Hallway'
-    },
+    { id: 1542, name: 'Willie Garson', characterName: "Phil's Assistant Kenny" },
+    { id: 236327, name: 'Ken Hudson Campbell', characterName: 'Man in Hallway' },
     { id: 1318541, name: 'Les Podewell', characterName: 'Old Man' },
-    {
-        id: 1674112,
-        name: 'Rod Sell',
-        characterName: 'Groundhog Official'
-    },
+    { id: 1674112, name: 'Rod Sell', characterName: 'Groundhog Official' },
     { id: 86571, name: 'Tom Milanovich', characterName: 'State Trooper' },
-    {
-        id: 1659415,
-        name: 'John M. Watson Sr.',
-        characterName: 'Bartender'
-    },
+    { id: 1659415, name: 'John M. Watson Sr.', characterName: 'Bartender' },
     { id: 36093, name: 'Peggy Roeder', characterName: 'Piano Teacher' },
     { id: 1524, name: 'Harold Ramis', characterName: 'Neurologist' },
     { id: 74487, name: 'David Pasquesi', characterName: 'Psychiatrist' },
@@ -184,11 +168,12 @@ describe('MovieActorStore', () => {
     });
 
 
-    describe('getFeaturesByActorId', () => {
+    describe('getMoviesByActorId', () => {
         it('should log to console', async () => {
             let movieStore = MovieActorStore.init();
-            let response = await movieStore.getFeaturesByActorId('1532');
-            // expect(response).toEqual(groundhogCast);
+            let response = await movieStore.getMoviesByActorId('1532');
+            expect(response.some((movie) => movie.title === 'Lost in Translation')).toBe(true);
+            expect(response.some((movie) => movie.title === 'Broken Flowers')).toBe(true);
         });
     });
 });
