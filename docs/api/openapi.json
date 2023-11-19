@@ -84,5 +84,114 @@
         }
       }
     }
+  },
+  "components": {
+    "schemas": {
+      "BaconFeature": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1223
+          },
+          "title": {
+            "type": "string",
+            "example": "The Wizard of Oz"
+          },
+          "characterName": {
+            "type": "string",
+            "example": "The Wicked Witch of the West"
+          }
+        }
+      },
+      "BaconFeatureList": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 33445
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 789
+                },
+                "title": {
+                  "type": "string",
+                  "example": "Another Movie Title"
+                },
+                "characterName": {
+                  "type": "string",
+                  "example": "Another Character Name"
+                }
+              }
+            }
+          }
+        }
+      },
+      "BaconActor": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "characterName": {
+            "type": "string",
+            "example": "Character Name"
+          }
+        }
+      },
+      "BaconMovie": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 456
+          },
+          "title": {
+            "type": "string",
+            "example": "Movie Title"
+          }
+        }
+      },
+      "BaconActorList": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "3"
+          },
+          "actors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 422
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Another Actor"
+                },
+                "characterName": {
+                  "type": "string",
+                  "example": "Another Character"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
