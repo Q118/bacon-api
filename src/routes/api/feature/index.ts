@@ -4,23 +4,21 @@ import { handleCaughtError } from '../../../utils/helpers';
 import { BaconServiceFactory } from '../../../services/ServiceFactory';
 
 // TODO: import { logger } from '../../../utils/logger';
-import { BaconActorList, BaconFeature } from '../../../types';
+import { BaconFeature } from '../../../types';
 export const featureRouter = Router({ mergeParams: true });
 
 
 
 
 
-// PICK UP HERE
 async function handleGetFeatureActors(req: Request, res: Response, next: NextFunction) {
     try {
         if (!req.params.feature_id) throw new Error('no feature id');
         const featureService = BaconServiceFactory.createFeatureService();
-        const featureCast = featureService.getFeatureCastByMovieId(+req.params.feature_id);
+        const featureCast = await featureService.getFeatureCastByMovieId(+req.params.feature_id);
         if (!featureCast) {
             return res.status(404).json({ message: 'cannot find cast for the requested feature ID.' });
         }
-        // return res.status(200).json({ id: 'very fake movie id', cast: [ { id: 'nothing', name: 'not a thing', characterName: 'george' } ] });
         return res.status(200).json({ id: req.params.feature_id, cast: featureCast });
     } catch (error) {
         handleCaughtError(res, error, 'handleGetActorFeatures');
