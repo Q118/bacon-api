@@ -1,8 +1,8 @@
-import express, { Express } from "express";
 import cors from "cors";
+import express, { Express } from "express";
 import swaggerUi from "swagger-ui-express";
-import * as swaggerDocument from "../docs/api/openapi-bacon.json";
 
+import * as swaggerDocument from "../docs/api/openapi-bacon.json";
 import { router } from "./routes";
 
 const app: Express = express();

@@ -1,6 +1,6 @@
 // import fetch from 'node-fetch';
 import { config } from '../../config';
-import { BaconFeature, BaconActor, BaconMovie } from '../../types';
+import { BaconActor, BaconFeature } from '../../types';
 import IDataInterface from '../DataInterface';
 
 // FUTURE: an abstracted repository layer if the complexity grows
@@ -65,7 +65,7 @@ export class MovieActorStore implements IDataInterface<BaconActor, BaconFeature>
         } else {
             throw new Error('invalid movie ID');
         }
-    };
+    }
 
     /**
      * @method getMoviesByActorId
@@ -83,7 +83,7 @@ export class MovieActorStore implements IDataInterface<BaconActor, BaconFeature>
         } else {
             throw new Error('invalid actor ID');
         }
-    };
+    }
 
 
     /** converts response to @type {BaconFeature} */
@@ -104,7 +104,7 @@ export class MovieActorStore implements IDataInterface<BaconActor, BaconFeature>
             characterName: data.character || 'unknown',
         };
         return actorObject;
-    };
+    }
 
 
 }

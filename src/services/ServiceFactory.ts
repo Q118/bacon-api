@@ -1,6 +1,6 @@
+import { MovieActorStore } from "../data/api/MovieActorStore";
 import { ActorService } from "./ActorService";
 import { FeatureService } from "./FeatureService";
-import { MovieActorStore } from "../data/api/MovieActorStore";
 
 type ActorServiceFactoryParams = {
     actor_id: number;
@@ -29,4 +29,4 @@ export class BaconServiceFactory {
             dataStore: dataStore
         });
     }
-};
+}

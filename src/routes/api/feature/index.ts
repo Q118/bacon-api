@@ -1,10 +1,10 @@
 
-import { Router, Request, Response, NextFunction } from 'express';
-import { handleCaughtError } from '../../../utils/helpers';
-import { BaconServiceFactory } from '../../../services/ServiceFactory';
+import { NextFunction,Request, Response, Router } from 'express';
 
+import { BaconServiceFactory } from '../../../services/ServiceFactory';
 // TODO: import { logger } from '../../../utils/logger';
 import { BaconFeature } from '../../../types';
+import { handleCaughtError } from '../../../utils/helpers';
 export const featureRouter = Router({ mergeParams: true });
 
 

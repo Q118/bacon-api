@@ -1,11 +1,12 @@
 /**
  * API Routes
  */
-import { Router, Request, Response, NextFunction } from 'express';
-import { actorRouter } from './actor';
-import { featureRouter } from './feature';
+import { NextFunction,Request, Response, Router } from 'express';
+
 import { handleCaughtError } from '../../utils/helpers';
 import { logger } from '../../utils/logger';
+import { actorRouter } from './actor';
+import { featureRouter } from './feature';
 
 export const apiRouter = Router({ mergeParams: true });
 

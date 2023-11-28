@@ -1,7 +1,8 @@
 
-import { Router, Request, Response, NextFunction } from 'express';
-import { handleCaughtError } from '../../../utils/helpers';
+import { NextFunction,Request, Response, Router } from 'express';
+
 import { BaconServiceFactory } from '../../../services/ServiceFactory';
+import { handleCaughtError } from '../../../utils/helpers';
 
 // import { logger } from '../../../utils/logger';
 // import { BaconFeatureList } from '../../../types';

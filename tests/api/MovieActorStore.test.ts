@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { MovieActorStore } from '../../src/data/api/MovieActorStore';
 
 // TODO: mock the fetch call...
@@ -143,12 +144,12 @@ describe('MovieActorStore', () => {
 
     describe('getMovieByTitle', () => {
         it('should return the groundhog-day response when getting my its title', async () => {
-            let movieStore = MovieActorStore.init();
-            let response = await movieStore.getMovieByTitle('Groundhog Day');
+            const movieStore = MovieActorStore.init();
+            const response = await movieStore.getMovieByTitle('Groundhog Day');
             expect(response).toEqual(groundhogResponse);
         });
         it('should throw an error if it cannot find the movie', async () => {
-            let movieStore = MovieActorStore.init();
+            const movieStore = MovieActorStore.init();
             await expect(movieStore.getMovieByTitle('*(@$&@$&)EU)&)DXSEU)@')).rejects.toThrow('no movie found');
         });
     });
@@ -156,13 +157,13 @@ describe('MovieActorStore', () => {
     describe('getCastByMovieId', () => {
 
         it('should return the cast of groundhog day', async () => {
-            let movieStore = MovieActorStore.init();
-            let response = await movieStore.getCastByMovieId(137);
+            const movieStore = MovieActorStore.init();
+            const response = await movieStore.getCastByMovieId(137);
             expect(response).toEqual(groundhogCast);
         });
 
         it('should throw an error if it cannot find the movie', async () => {
-            let movieStore = MovieActorStore.init();
+            const movieStore = MovieActorStore.init();
             await expect(movieStore.getCastByMovieId(99999999999)).rejects.toThrow('invalid movie ID');
         });
     });
@@ -170,8 +171,8 @@ describe('MovieActorStore', () => {
 
     describe('getMoviesByActorId', () => {
         it('should log to console', async () => {
-            let movieStore = MovieActorStore.init();
-            let response = await movieStore.getMoviesByActorId(1532);
+            const movieStore = MovieActorStore.init();
+            const response = await movieStore.getMoviesByActorId(1532);
             expect(response.some((movie) => movie.title === 'Lost in Translation')).toBe(true);
             expect(response.some((movie) => movie.title === 'Broken Flowers')).toBe(true);
         });

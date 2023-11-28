@@ -3,8 +3,9 @@
  */
 
 import { NextFunction, Request, Response, Router } from 'express';
-import { apiRouter } from './api';
+
 import { logger } from '../utils/logger';
+import { apiRouter } from './api';
 // import { ErrorObject } from '../types';
 
 export const router = Router();
