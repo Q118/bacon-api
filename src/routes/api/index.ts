@@ -1,7 +1,7 @@
 /**
  * API Routes
  */
-import { NextFunction,Request, Response, Router } from 'express';
+import { Request, Response, Router } from 'express';
 
 import { handleCaughtError } from '../../utils/helpers';
 import { logger } from '../../utils/logger';
@@ -20,13 +20,13 @@ apiRouter.use('/feature', featureRouter);
  * @param res 
  * @param next 
  */
-async function handleAuthCheck(req: Request, res: Response, next: NextFunction) {
+async function handleAuthCheck(req: Request, res: Response) {
     try {
         logger.info("Request received to health check user.");
         // TODO: stuff in here to ensure its locked down the access to it only coming from the client i say
         res.status(200).json({ message: 'Health check passed! You are authorized.' });
     } catch (error) {
-        handleCaughtError(res, error, 'handleAuthCheck');
+        handleCaughtError(res, error as Error, 'handleAuthCheck');
     }
 }
 
@@ -45,5 +45,5 @@ apiRouter.get('/check', (req, res, next) => {
         }
     }   
 */
-    handleAuthCheck(req, res, next).catch(next);
+    handleAuthCheck(req, res).catch(next);
 });

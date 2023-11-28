@@ -1,4 +1,9 @@
 /**
+ * @fileoverview typescript types for the bacon api
+ */
+
+
+/**
  * @type BaconActor
  * actor return type
  */

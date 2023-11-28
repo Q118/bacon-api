@@ -1,5 +1,5 @@
 
-import { NextFunction,Request, Response, Router } from 'express';
+import { Request, Response, Router } from 'express';
 
 import { BaconServiceFactory } from '../../../services/ServiceFactory';
 import { handleCaughtError } from '../../../utils/helpers';
@@ -16,7 +16,7 @@ export const actorRouter = Router({ mergeParams: true });
 
 
 
-async function handleGetActorFeatures(req: Request, res: Response, next: NextFunction) {
+async function handleGetActorFeatures(req: Request, res: Response) {
     try {
         // console.log('req.params', req.params)
         if (!req.params.actor_id) throw new Error('no actor id');
@@ -28,7 +28,7 @@ async function handleGetActorFeatures(req: Request, res: Response, next: NextFun
         }
         return res.status(200).json({ id: req.params.actor_id, features: featureListResult });
     } catch (error) {
-        handleCaughtError(res, error, 'handleGetActorFeatures');
+        handleCaughtError(res, error as Error, 'handleGetActorFeatures');
     }
 }
 
@@ -48,5 +48,5 @@ actorRouter.get('/:actor_id/features', (req, res, next) => {
         }
     } 
 */
-    handleGetActorFeatures(req, res, next).catch(next);
+    handleGetActorFeatures(req, res).catch(next);
 });

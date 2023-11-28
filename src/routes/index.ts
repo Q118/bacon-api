@@ -26,13 +26,13 @@ router.use('/api', apiRouter);
 /**
  * Not Found Error
  */
-router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+router.use((err: Error, req: Request, res: Response) => {
     res.status(404).json({ message: 'Not Found' });
 });
 
 /**
 * Catch All Errors
 */
-router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+router.use((err: Error, req: Request, res: Response) => {
     res.status(500).json({ message: 'Internal Server Error' });
 });

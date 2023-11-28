@@ -1,5 +1,5 @@
 
-import { NextFunction,Request, Response, Router } from 'express';
+import { Request, Response, Router } from 'express';
 
 import { BaconServiceFactory } from '../../../services/ServiceFactory';
 // TODO: import { logger } from '../../../utils/logger';
@@ -11,7 +11,7 @@ export const featureRouter = Router({ mergeParams: true });
 
 
 
-async function handleGetFeatureActors(req: Request, res: Response, next: NextFunction) {
+async function handleGetFeatureActors(req: Request, res: Response) {
     try {
         if (!req.params.feature_id) throw new Error('no feature id');
         const featureService = BaconServiceFactory.createFeatureService();
@@ -21,11 +21,11 @@ async function handleGetFeatureActors(req: Request, res: Response, next: NextFun
         }
         return res.status(200).json({ id: req.params.feature_id, cast: featureCast });
     } catch (error) {
-        handleCaughtError(res, error, 'handleGetActorFeatures');
+        handleCaughtError(res, error as Error, 'handleGetActorFeatures');
     }
 }
 
-async function handleGetMovieId(req: Request, res: Response, next: NextFunction) {
+async function handleGetMovieId(req: Request, res: Response) {
     try {
         const { title } = req.query;
         if (!title) throw new Error('no title provided');
@@ -36,7 +36,7 @@ async function handleGetMovieId(req: Request, res: Response, next: NextFunction)
         }
         return res.status(200).json({ id: featureResult.id, title: featureResult.title });
     } catch (error) {
-        handleCaughtError(res, error, 'handleGetMovieId');
+        handleCaughtError(res, error as Error, 'handleGetMovieId');
     }
 }
 
@@ -53,7 +53,7 @@ featureRouter.get('/:feature_id/cast', (req, res, next) => {
             }
         }   
     */
-    handleGetFeatureActors(req, res, next).catch(next);
+    handleGetFeatureActors(req, res).catch(next);
 });
 
 
@@ -80,5 +80,5 @@ featureRouter.post('/get_id', (req, res, next) => {
             }
         }   
     */
-    handleGetMovieId(req, res, next).catch(next);
+    handleGetMovieId(req, res).catch(next);
 });

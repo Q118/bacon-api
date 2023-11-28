@@ -9,7 +9,7 @@
         "swagger": "node ./scripts/swagger.js",
         "test": "vitest --ui",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives",
-        "test:no-ui": "vitest",
+        "test:no-ui": "vitest run",
         "prepare": "husky install",
         "lint:fix": "eslint --fix . --ext ts,tsx --report-unused-disable-directives"
     },

@@ -27,10 +27,6 @@ export class FeatureService {
     }
 
 
-    getFeatureById(feature_id: string) {
-        // return this.answer_id;
-    }
-
     getFeatureByTitle = async (feature_title: string) => {
         const feature = await this.dataStore.getMovieByTitle(feature_title);
         return feature;

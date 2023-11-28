@@ -1,6 +1,6 @@
-// import fetch from 'node-fetch';
 import { config } from '../../config';
 import { BaconActor, BaconFeature } from '../../types';
+import { ActorTMDB, MovieActorTMDB,MovieTMDB } from '../../types/tmdb';
 import IDataInterface from '../DataInterface';
 
 // FUTURE: an abstracted repository layer if the complexity grows
@@ -35,7 +35,7 @@ export class MovieActorStore implements IDataInterface<BaconActor, BaconFeature>
     async getMovieByTitle(title: string): Promise<BaconFeature> {
         const url = `${this.api_base}/search/movie?query=${title}${this.url_suffix}`;
         const response = await fetch(url);
-        const data = await response.json() as { results: any[] };
+        const data = await response.json() as { results: MovieTMDB[] };
         if (data && data.results && data.results.length > 0) {
             // info: likely it is the top one
             const firstFeature = data.results[ 0 ];
@@ -58,7 +58,7 @@ export class MovieActorStore implements IDataInterface<BaconActor, BaconFeature>
         // only try catch in the route/controller bc that is what makes sense dug
         const url = `${this.api_base}/movie/${id}/credits?api_key=${this.api_key}`;
         const response = await fetch(url);
-        const data = await response.json() as { cast: any[] };
+        const data = await response.json() as { cast: ActorTMDB[] };
         if (data && data.cast && data.cast.length > 0) {
             const actors = data.cast.map((actor) => this.convertToBaconActor(actor));
             return actors;
@@ -75,7 +75,7 @@ export class MovieActorStore implements IDataInterface<BaconActor, BaconFeature>
     async getMoviesByActorId(id: number): Promise<BaconFeature[]> {
         const url = `${this.api_base}/person/${id}/movie_credits?api_key=${this.api_key}`;
         const response = await fetch(url);
-        const data = await response.json() as { cast: any[] };
+        const data = await response.json() as { cast: MovieActorTMDB[] };
         if (data && data.cast && data.cast.length > 0) {
             const movies = data.cast.map((movie) => this.convertToBaconFeature(movie));
             // console.log(movies)
@@ -87,7 +87,7 @@ export class MovieActorStore implements IDataInterface<BaconActor, BaconFeature>
 
 
     /** converts response to @type {BaconFeature} */
-    private convertToBaconFeature(data: any): BaconFeature {
+    private convertToBaconFeature(data: MovieActorTMDB): BaconFeature {
         const movieObject: BaconFeature = {
             id: data.id,
             title: data.original_title || data.title,
@@ -97,7 +97,7 @@ export class MovieActorStore implements IDataInterface<BaconActor, BaconFeature>
     }
 
     /** converts response to @type {BaconActor} */
-    private convertToBaconActor(data: any): BaconActor {
+    private convertToBaconActor(data: ActorTMDB): BaconActor {
         const actorObject: BaconActor = {
             id: data.id,
             name: data.name || data.original_name,
