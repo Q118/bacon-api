@@ -34,6 +34,7 @@ async function handleAuthCheck(req: Request, res: Response) {
 
 
 apiRouter.get('/check', (req, res, next) => {
+    // #swagger.name = "AuthCheck"
     /* #swagger.responses[200] = {
         description: "sanity check to ensure the api is up and running and client is authorized",
         content: {
