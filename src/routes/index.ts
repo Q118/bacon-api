@@ -26,13 +26,14 @@ router.use('/api', apiRouter);
 /**
  * Not Found Error
  */
+// FIXme: this is not working, throwing res.status is not a function
 router.use((err: Error, req: Request, res: Response) => {
-    res.status(404).json({ message: 'Not Found' });
+    return res.status(404).json({ message: 'Not Found' });
 });
 
 /**
 * Catch All Errors
 */
 router.use((err: Error, req: Request, res: Response) => {
-    res.status(500).json({ message: 'Internal Server Error' });
+    return res.status(500).json({ message: 'Internal Server Error' });
 });

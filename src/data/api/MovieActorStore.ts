@@ -37,6 +37,7 @@ export class MovieActorStore implements IDataInterface<BaconActor, BaconFeature>
         const response = await fetch(url);
         const data = await response.json() as { results: MovieTMDB[] };
         if (data && data.results && data.results.length > 0) {
+            console.log(data.results);
             // info: likely it is the top one
             const firstFeature = data.results[ 0 ];
             const movieObject: BaconFeature = {

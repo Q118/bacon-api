@@ -15,9 +15,7 @@ app.use(cors({
 }));
 
 
-/** routes */
-// app.use('/v1', router);
-app.use('/', router);
+
 
 /** 
  * swagger
@@ -29,6 +27,9 @@ if (process.env.environment !== 'production') {
     console.log(`Live Swagger openapi docs at http://localhost:${PORT}/api-docs`);
 }
 
+/** routes */
+// app.use('/v1', router);
+app.use('/', router);
 
 
 
