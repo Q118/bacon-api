@@ -33,10 +33,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-    #   - name: Setup Node  .... was going to use this but actually can just enforce a regen of the swagger json before a push
-    #     uses: actions/setup-node@v3
-    #     with:
-    #         node-version: "20.x"
+      - name: Setup Node  # .... was going to use this but actually can just enforce a regen of the swagger json before a push
+        uses: actions/setup-node@v3
+        with:
+            node-version: "20.x"
+            
 
 
 
