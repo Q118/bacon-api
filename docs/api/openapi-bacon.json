@@ -61,7 +61,7 @@
     },
     "/feature/{feature_id}/cast": {
       "get": {
-        "description": "",
+        "description": "get a list of actors that have been in a requested feature",
         "parameters": [
           {
             "name": "feature_id",
