@@ -1,0 +1,259 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Bacon API",
+    "description": "backend service for bacon logic",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4020/api",
+      "description": "Local Development"
+    }
+  ],
+  "paths": {
+    "/check": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "sanity check to ensure the api is up and running and client is authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/authCheckResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/actor/{actor_id}/features": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "actor_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all features for an actor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaconFeatureList"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/feature/{feature_id}/cast": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "feature_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "feature list return type that a requested actor has been in",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaconFeatureList"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/feature/get_id": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "title",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "just a movie thats been looked up by title",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaconMovie"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetMovieRequest"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BaconFeature": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1223
+          },
+          "title": {
+            "type": "string",
+            "example": "The Wizard of Oz"
+          },
+          "characterName": {
+            "type": "string",
+            "example": "The Wicked Witch of the West"
+          }
+        }
+      },
+      "BaconFeatureList": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 33445
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 789
+                },
+                "title": {
+                  "type": "string",
+                  "example": "Another Movie Title"
+                },
+                "characterName": {
+                  "type": "string",
+                  "example": "Another Character Name"
+                }
+              }
+            }
+          }
+        }
+      },
+      "BaconActor": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "characterName": {
+            "type": "string",
+            "example": "Character Name"
+          }
+        }
+      },
+      "BaconMovie": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 456
+          },
+          "title": {
+            "type": "string",
+            "example": "Movie Title"
+          }
+        }
+      },
+      "BaconActorList": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "3"
+          },
+          "actors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 456
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Jane Doe"
+                },
+                "characterName": {
+                  "type": "string",
+                  "example": "Charlie Brock"
+                }
+              }
+            }
+          }
+        }
+      },
+      "authCheckResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Health check passed! You are authorized."
+          }
+        }
+      },
+      "GetMovieRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "User Inputted Movie Title"
+          }
+        }
+      }
+    }
+  }
+}
