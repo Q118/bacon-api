@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run test:no-ui && npm run swagger
+npm run swagger && git add ./swagger.json && git commit -m "chore(docs): Update swagger.json"

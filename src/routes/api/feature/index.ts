@@ -42,6 +42,8 @@ async function handleGetMovieId(req: Request, res: Response) {
 
 
 featureRouter.get('/:feature_id/cast', (req, res, next) => {
+    // #swagger.name = "GetFeatureActors"
+    // #swagger.description = "get a list of actors that have been in a requested feature"
     /* #swagger.responses[200] = {
             description: "feature list return type that a requested actor has been in",
             content: {

@@ -14,10 +14,10 @@
   "paths": {
     "/check": {
       "get": {
-        "description": "",
+        "description": "sanity check to ensure the api is up and running and client is authorized",
         "responses": {
           "200": {
-            "description": "sanity check to ensure the api is up and running and client is authorized",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
