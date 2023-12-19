@@ -1,8 +1,10 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Build Documentation and Deploy Swagger
+
+# THIS IS WORKING but just need a way to get the commit/build id into the index.html file so it shows
+# AND need step to add the commit/build id to the page.
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
 
@@ -22,22 +24,49 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
   deploy:
+    name: Setup Swagger UI and Deploy to GitHub Pages 
     environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+    #   - name: Setup Node  .... was going to use this but actually can just enforce a regen of the swagger json before a push
+    #     uses: actions/setup-node@v3
+    #     with:
+    #         node-version: "20.x"
+
+
+
+      - name: Get Latest Swagger UI Release
+        id: swagger-ui
+        run: |
+          release_tag=$(curl -sL https://api.github.com/repos/swagger-api/swagger-ui/releases/latest | jq -r ".tag_name")
+          echo "release_tag=$release_tag" >> $GITHUB_OUTPUT
+      - name: Update Swagger UI
+        env:
+          RELEASE_TAG: ${{ steps.swagger-ui.outputs.release_tag }}
+          SWAGGER_YAML: "openapi-bacon.json"       
+          # The below run does the following: 
+          # Delete the current pages directory, Download the release, Extract the dist directory, Move the the dist directory to pages, copy the swagger file from docs to pages directory, Fix references to url in pages/swagger-initializer
+        run: |
+            rm -fr pages
+            curl -sL -o $RELEASE_TAG https://api.github.com/repos/swagger-api/swagger-ui/tarball/$RELEASE_TAG
+            tar -xzf $RELEASE_TAG --strip-components=1 $(tar -tzf $RELEASE_TAG | head -1 | cut -f1 -d"/")/dist
+            rm $RELEASE_TAG
+            mv dist pages
+            cp docs/openapi-bacon.json pages  
+            sed -i "s|https://petstore.swagger.io/v2/swagger.json|$SWAGGER_YAML|g" pages/swagger-initializer.js
+      
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          # Point to ./dist
-          path: "./dist"
+          # Point to ./pages directory
+          path: "./pages"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3

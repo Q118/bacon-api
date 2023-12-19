@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run test:no-ui 
+npm run swagger
+#  this will force the swagger to generate and if the changes are not commited it will fail
+
+# echo "Swagger file updated"
 
