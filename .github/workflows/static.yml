@@ -59,7 +59,7 @@ jobs:
             tar -xzf $RELEASE_TAG --strip-components=1 $(tar -tzf $RELEASE_TAG | head -1 | cut -f1 -d"/")/dist
             rm $RELEASE_TAG
             mv dist pages
-            cp docs/openapi-bacon.json pages  
+            cp docs/api/openapi-bacon.json pages  
             sed -i "s|https://petstore.swagger.io/v2/swagger.json|$SWAGGER_YAML|g" pages/swagger-initializer.js
       
       - name: Get Short Commit ID
