@@ -1,9 +1,11 @@
+/* eslint-disable no-undef */
+
 window.onload = function () {
     //<editor-fold desc="Changeable Configuration Block">
 
     // the following lines will be replaced by docker/configurator, when it runs in a docker-container
     window.ui = SwaggerUIBundle({
-        url: "./docs/api/openapi-bacon.json",
+        url: "../docs/api/openapi-bacon.json",
         dom_id: '#swagger-ui',
         deepLinking: true,
         presets: [
